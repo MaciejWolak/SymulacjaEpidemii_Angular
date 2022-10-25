@@ -1,0 +1,163 @@
+<div class="container" id="main-container">
+  <div class="btn btn-warning btn-block mb-3" (click)="onOpenModal(null, 'add')">Add Parameters</div>
+  <div class="btn btn-info btn-block mb-3"(click)="getParameters()" >Załaduj tabele</div>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Simulation name</th>
+      <th scope="col">Population size</th>
+      <th scope="col">Initial number of infected people</th>
+      <th scope="col">Infection rate</th>
+      <th scope="col">Death rate</th>
+      <th scope="col">Time to death</th>
+      <th scope="col">Time to recovery</th>
+      <th scope="col">Time of simulation</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let parameters of parametersTable">
+    <tr>
+      <th scope="row">{{parameters.id}}</th>
+      <td>{{parameters.simulationName}}</td>
+      <td>{{parameters.populationSize}}</td>
+      <td>{{parameters.initialNumberOfInfectedPeople}}</td>
+      <td>{{parameters.infectionRate}}</td>
+      <td>{{parameters.deathRate}}</td>
+      <td>{{parameters.timeToDeath}}</td>
+      <td>{{parameters.timeToRecovery}}</td>
+      <td>{{parameters.timeOfSimulation}}</td>
+      <td>
+        <button type="button" class="btn btn-secondary">Szczegóły</button>
+        <button type="button" class="btn btn-primary" (click)="onOpenModal(parameters, 'edit')">Edit
+        </button>
+        <button (click)="onOpenModal(parameters, 'delete')" type="button" class="ml-2 btn btn-danger">X</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Add Product Modal -->
+  <div class="modal fade" id="addParametersModal" tabindex="-1" role="dialog" aria-labelledby="addParametersModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addParametersModalLabel">Add parameters</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #addForm="ngForm" (ngSubmit)="addParameters(addForm)">
+            <div class="form-group">
+              <label for="simulationName">Simulation name</label>
+              <input type="text" ngModel name="simulationName" class="form-control" placeholder="Covid 19 var 1" required>
+            </div>
+            <div class="form-group">
+              <label for="populationSize">Population size</label>
+              <input type="number" ngModel name="populationSize" class="form-control" placeholder="1000000" required>
+            </div>
+            <div class="form-group">
+              <label for="initialNumberOfInfectedPeople">Initial number of infected people</label>
+              <input type="number" ngModel name="initialNumberOfInfectedPeople" class="form-control"  placeholder="10" required>
+            </div>
+            <div class="form-group">
+              <label for="infectionRate">Infection rate</label>
+              <input type="number" ngModel name="infectionRate" class="form-control"  placeholder="2" required>
+            </div>
+            <div class="form-group">
+              <label for="deathRate">Death rate</label>
+              <input type="number" ngModel name="deathRate" class="form-control"  placeholder="10" required>
+            </div>
+            <div class="form-group">
+              <label for="timeToDeath">Time to death</label>
+              <input type="number" ngModel name="timeToDeath" class="form-control"  placeholder="8" required>
+            </div>
+            <div class="form-group">
+              <label for="timeToRecovery">Time to recovery</label>
+              <input type="number" ngModel name="timeToRecovery" class="form-control"  placeholder="5" required>
+            </div>
+            <div class="form-group">
+              <label for="timeOfSimulation">Time of simulation</label>
+              <input type="number" ngModel name="timeOfSimulation" class="form-control"  placeholder="100" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="add-song-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="updateParametersModal" tabindex="-1" role="dialog" aria-labelledby="parametersEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateParametersModalLabel">Edit parameters:  {{editParameters.simulationName}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #editForm="ngForm">
+            <div class="form-group">
+              <label for="id">Simulation Id</label>
+              <input  type="number" ngModel="{{editParameters.id}}" name="id" class="form-control" id="id">
+              <label for="simulationName">Simulation name</label>
+              <input  type="text" ngModel="{{editParameters.simulationName}}" name="simulationName" class="form-control" id="simulationName">
+              <label for="populationSize">Population size</label>
+              <input type="number" ngModel="{{editParameters.populationSize}}" name="populationSize" class="form-control" id="populationSize" aria-describedby="emailHelp">
+              <label for="initialNumberOfInfectedPeople">Initial number of infected people</label>
+              <input type="number" ngModel="{{editParameters.initialNumberOfInfectedPeople}}" name="initialNumberOfInfectedPeople" class="form-control" id="initialNumberOfInfectedPeople">
+              <label for="infectionRate">Infection rate</label>
+              <input type="number" ngModel="{{editParameters.infectionRate}}" name="infectionRate" class="form-control" id="infectionRate">
+              <label for="deathRate">Death rate</label>
+              <input type="number" ngModel="{{editParameters.deathRate}}" name="deathRate" class="form-control" id="deathRate">
+              <label for="timeToDeath">Time to death</label>
+              <input type="number" ngModel="{{editParameters.timeToDeath}}" name="timeToDeath" class="form-control" id="timeToDeath">
+              <label for="timeToRecovery">Time to recovery</label>
+              <input type="number" ngModel="{{editParameters.timeToRecovery}}" name="timeToRecovery" class="form-control" id="timeToRecovery">
+              <label for="timeOfSimulation">Time of simulation</label>
+              <input type="number" ngModel="{{editParameters.timeOfSimulation}}" name="timeOfSimulation" class="form-control" id="timeOfSimulation">
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+              <button (click)="updateParameters(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteParametersModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModelLabel">Delete Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete parameters: {{deleteParameters.id}}</p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button (click)="removeParameters(deleteParameters.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Notification for no parameters -->
+  <div *ngIf="parametersTable.length === null" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">No Parameters!</h4>
+      <p>No Parameters were found.</p>
+    </div>
+  </div>
+</div>
