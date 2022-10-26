@@ -3,6 +3,7 @@ import {ParametersService} from "../../service/parameters.service";
 import {Parameters} from "../../model/parameters";
 import {NgForm} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Results} from "../../model/results";
 
 @Component({
   selector: 'app-parameters-manager',
@@ -16,6 +17,7 @@ export class ParametersManagerComponent implements OnInit {
   public editParameters: Parameters;
   public deleteParameters: Parameters;
 
+  @Input() results : Results | undefined;
 
 
 
