@@ -11,13 +11,17 @@ import { HeaderComponent } from './shered/header/header.component';
 import { ResultComponent } from './components/result/result.component';
 import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "./app-routing/app-routing.module";
+import { OneResultComponent } from './components/result/one-result/one-result.component';
+import { FooterComponent } from './shered/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ParametersManagerComponent,
     HeaderComponent,
-    ResultComponent
+    ResultComponent,
+    OneResultComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

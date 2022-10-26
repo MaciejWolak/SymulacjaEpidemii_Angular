@@ -1,5 +1,5 @@
-<div class="container" id="main-container">
-  <div class="btn btn-warning btn-block mb-3" (click)="onOpenModal(null, 'add')">Add Parameters</div>
+<div class="container col-10 mt-2" id="main-container">
+  <div class="btn btn-warning btn-block mb-3 "  (click)="onOpenModal(null, 'add')">Add Parameters</div>
   <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -26,11 +26,11 @@
       <td>{{parameters.timeToDeath}}</td>
       <td>{{parameters.timeToRecovery}}</td>
       <td>{{parameters.timeOfSimulation}}</td>
-      <td>
-        <button type="button" class="btn btn-secondary">Szczegóły</button>
+      <td class="btn-group">
+        <button  class="btn btn-secondary" routerLink="/results/{{parameters.id}}">Details</button>
         <button type="button" class="btn btn-primary" (click)="onOpenModal(parameters, 'edit')">Edit
         </button>
-        <button (click)="onOpenModal(parameters, 'delete')" type="button" class="ml-2 btn btn-danger">X</button>
+        <button (click)="onOpenModal(parameters, 'delete')" type="button" class="btn btn-danger">X</button>
       </td>
     </tr>
     </tbody>
@@ -47,7 +47,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form #addForm="ngForm" (ngSubmit)="addParameters(addForm)" action="/action_page.php" class="was-validated">
+          <form #addForm="ngForm" (ngSubmit)="addParameters(addForm)" class="was-validated">
             <div class="form-group">
               <label for="simulationName">Simulation name</label>
               <input type="text" ngModel name="simulationName" class="form-control" placeholder="np. Covid19-var1" required>

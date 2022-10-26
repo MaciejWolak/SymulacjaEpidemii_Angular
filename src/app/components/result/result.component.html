@@ -1,1 +1,8 @@
-<p>result works!</p>
+<p class="text-center">
+  <a class="text-primary" routerLink="/">
+    Go Back
+  </a>
+</p>
+<app-one-result *ngFor="let results of resultList"  [result]="results">
+
+</app-one-result>

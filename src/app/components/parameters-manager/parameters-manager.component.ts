@@ -17,7 +17,6 @@ export class ParametersManagerComponent implements OnInit {
   public editParameters: Parameters;
   public deleteParameters: Parameters;
 
-  @Input() results : Results | undefined;
 
 
 
@@ -98,4 +97,6 @@ export class ParametersManagerComponent implements OnInit {
     container.appendChild(button);
     button.click();
   }
+
+
 }
